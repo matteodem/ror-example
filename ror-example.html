@@ -1,0 +1,91 @@
+<head>
+  <title>ror-test</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+  {{> blog}}
+</body>
+
+<template name="blog">
+    <div class="ui two column grid">
+      <div class="column">
+        <h1 class="huge ui header">
+            {{post.title}}
+            <div class="sub header">{{post.likes}} likes,  {{post.createdAt}}</div>
+        </h1>
+        <div class="basic ui segment">{{post.text}}</div>
+        {{#ifRorHasChanged collection=postCollection}}
+        <div class="animated fadeIn">
+            The post has been updated
+            {{> rorTriggerButton
+              class="small ui basic button"
+              id="updatePost"
+              content="Show"
+            }}
+        </div>
+        {{/ifRorHasChanged}}
+        <div class="ui piled blue segment">
+          <h2 class="ui header">
+            <i class="icon inverted circular blue comment"></i> Comments
+          </h2>
+          <div class="something-happened">
+            {{#ifRorNewDocuments collection=commentsCollection}}
+            <div class="animated fadeInDown">
+              <div class="ui info message">
+                {{commentPhrase}} been added
+                {{> rorTriggerButton
+                  collection=commentsCollection
+                  content="Show"
+                  class="tiny ui blue button update-comments"
+                }}
+              </div>
+            </div>
+            {{/ifRorNewDocuments}}
+            {{#ifRorRemovedDocuments collection=commentsCollection}}
+            <div class="animated fadeInDown">
+              <div class="ui info message">
+                {{commentPhrase}} been removed
+                {{> rorTriggerButton
+                  collection=commentsCollection
+                  content="Show"
+                  class="tiny ui blue button update-comments"
+                }}
+              </div>
+            </div>
+            {{/ifRorRemovedDocuments}}
+          </div>
+          <div class="ui comments">
+            <div class="container">
+              {{#each comment}}
+              <div class="comment">
+                <a class="avatar">
+                  <img src="https://lh5.googleusercontent.com/-_B87VGbuz2E/TYmjdjwV7bI/AAAAAAAAFlA/EY-0D9_UL7c/s1600/AWESOME+FACEBOOK+PROFILE+PICTURES10.jpg">
+                </a>
+                <div class="content">
+                  <a class="author">{{name}}</a>
+                  <div class="metadata">
+                    <span class="date">{{longAgo}}</span>
+                  </div>
+                  <div class="text">
+                      {{content}}
+                  </div>
+                </div>
+              </div>
+              {{/each}}
+            </div>
+            <form class="ui reply form">
+              <div class="field">
+                <textarea class="comment-textarea"></textarea>
+              </div>
+              <button class="ui fluid blue labeled submit icon button">
+                Add Reply
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  <ul>
+    </ul>
+</template>

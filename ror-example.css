@@ -1,0 +1,19 @@
+/* CSS declarations go here */
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.ui.comments .container {
+  max-height: 300px;
+  overflow: auto;
+}
+
+.ui.message {
+  padding: 0.5em !important;
+}
+
+.something-happened {
+  min-height: 50px;
+  transition: height 2s;
+}
