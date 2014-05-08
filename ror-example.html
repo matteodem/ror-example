@@ -15,12 +15,12 @@
             <div class="sub header">{{post.likes}} likes,  {{post.createdAt}}</div>
         </h1>
         <div class="basic ui segment">{{post.text}}</div>
-        {{#ifRorHasChanged collection=postCollection}}
+        {{#ifRorHasChanged doc=post}}
         <div class="animated fadeIn">
             The post has been updated
             {{> rorTriggerButton
+              doc=post
               class="small ui basic button"
-              id="updatePost"
               content="Show"
             }}
         </div>
@@ -30,30 +30,18 @@
             <i class="icon inverted circular blue comment"></i> Comments
           </h2>
           <div class="something-happened">
-            {{#ifRorNewDocuments collection=commentsCollection}}
+            {{#ifRorHasChanged cursor=comment}}
             <div class="animated fadeInDown">
               <div class="ui info message">
-                {{commentPhrase}} been added
+                {{commentPhrase}}
                 {{> rorTriggerButton
-                  collection=commentsCollection
+                  cursor=comment
                   content="Show"
                   class="tiny ui blue button update-comments"
                 }}
               </div>
             </div>
-            {{/ifRorNewDocuments}}
-            {{#ifRorRemovedDocuments collection=commentsCollection}}
-            <div class="animated fadeInDown">
-              <div class="ui info message">
-                {{commentPhrase}} been removed
-                {{> rorTriggerButton
-                  collection=commentsCollection
-                  content="Show"
-                  class="tiny ui blue button update-comments"
-                }}
-              </div>
-            </div>
-            {{/ifRorRemovedDocuments}}
+            {{/ifRorHasChanged}}
           </div>
           <div class="ui comments">
             <div class="container">

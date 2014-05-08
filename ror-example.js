@@ -30,18 +30,16 @@ if (Meteor.isClient) {
     };
 
     Template.blog.commentPhrase = function() {
-        if (this.howMany > 1) {
-          return this.howMany + ' comments have';
+        if (this.difference > 0) {
+          return this.difference + ' comments have been added';
+        } else if (this.difference < 0) {
+            return -this.difference + ' comments have been removed';
         }
 
-        return this.howMany + ' comment has';
+        return 'Comments have been changed';
     };
 
     Template.blog.events({
-        'click #updatePost': function(e) {
-            BlogPost.rorTrigger();
-            e.preventDefault();
-        },
         'submit .reply.form' : function (e) {
             Comments.insert({
                 'name': 'Anonymous',
@@ -80,7 +78,7 @@ if (Meteor.isServer) {
                 'created' : new Date()
             });
 
-            if (Comments.find().count() >= 30) {
+            if (Comments.find().count() >= 15) {
                 Comments.remove({});
 
                 BlogPost.update({
@@ -107,7 +105,7 @@ if (Meteor.isServer) {
                     'text' : 'text ' + post.text + ' additional content'
                 }
             });
-        }, 12000);
+        }, 8000);
 
         BlogPost.remove({});
         BlogPost.insert({
