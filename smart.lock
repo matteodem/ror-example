@@ -4,7 +4,8 @@
     "basePackages": {
       "semantic-ui": {},
       "moment": {},
-      "animate-css": {}
+      "animate-css": {},
+      "reactive-on-request": {}
     },
     "packages": {
       "semantic-ui": {
@@ -19,8 +20,13 @@
       },
       "animate-css": {
         "git": "https://github.com/nate-strauser/meteor-animate-css.git",
-        "tag": "v2.1.0",
-        "commit": "08d7d98ce292d528f05eab91bfb220b3a355c1d5"
+        "tag": "v3.1.1",
+        "commit": "59ce70b99dff5bc3d1227b789eefa43a761db158"
+      },
+      "reactive-on-request": {
+        "git": "https://github.com/matteodem/reactive-on-request.git",
+        "tag": "v0.6.1",
+        "commit": "d6c0956bb69754a0423a8f87a5814a70669021ff"
       }
     }
   }
